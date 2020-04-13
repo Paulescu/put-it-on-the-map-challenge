@@ -1,0 +1,2226 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<!-- build 20192.19.0818.2120                               -->
+<workbook source-build='2019.2.3 (20192.19.0818.2120)' source-platform='mac' version='18.1' xmlns:user='http://www.tableausoftware.com/xml/user'>
+  <document-format-change-manifest>
+    <AutoCreateAndUpdateDSDPhoneLayouts ignorable='true' predowngraded='true' />
+    <SheetIdentifierTracking ignorable='true' predowngraded='true' />
+    <SortTagCleanup />
+    <WindowsPersistSimpleIdentifiers />
+  </document-format-change-manifest>
+  <preferences>
+    <preference name='ui.encoding.shelf.height' value='24' />
+    <preference name='ui.shelf.height' value='26' />
+  </preferences>
+  <datasources>
+    <datasource caption='model_1' inline='true' name='federated.1sdhlwk1l7ac5816ouqq41j4074i' version='18.1'>
+      <connection class='federated'>
+        <named-connections>
+          <named-connection caption='model_1' name='textscan.0bwuqk901ras5u14vqk0s1wvf94c'>
+            <connection class='textscan' directory='/Users/paulabartabajo/src/put-it-on-the-map-challenge/eda' filename='model_1.csv' password='' server='' />
+          </named-connection>
+        </named-connections>
+        <relation connection='textscan.0bwuqk901ras5u14vqk0s1wvf94c' name='model_1.csv' table='[model_1#csv]' type='table'>
+          <columns character-set='UTF-8' header='yes' locale='en_US' separator=','>
+            <column datatype='integer' name='F1' ordinal='0' />
+            <column datatype='string' name='image_id' ordinal='1' />
+            <column datatype='integer' name='actual_class' ordinal='2' />
+            <column datatype='integer' name='predicted_class' ordinal='3' />
+            <column datatype='real' name='rmse' ordinal='4' />
+          </columns>
+        </relation>
+        <metadata-records>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[model_1.csv]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='character-set'>&quot;UTF-8&quot;</attribute>
+              <attribute datatype='string' name='collation'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='field-delimiter'>&quot;,&quot;</attribute>
+              <attribute datatype='string' name='header-row'>&quot;true&quot;</attribute>
+              <attribute datatype='string' name='locale'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='single-char'>&quot;&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>F1</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[F1]</local-name>
+            <parent-name>[model_1.csv]</parent-name>
+            <remote-alias>F1</remote-alias>
+            <ordinal>0</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>image_id</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[image_id]</local-name>
+            <parent-name>[model_1.csv]</parent-name>
+            <remote-alias>image_id</remote-alias>
+            <ordinal>1</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>actual_class</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[actual_class]</local-name>
+            <parent-name>[model_1.csv]</parent-name>
+            <remote-alias>actual_class</remote-alias>
+            <ordinal>2</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>predicted_class</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[predicted_class]</local-name>
+            <parent-name>[model_1.csv]</parent-name>
+            <remote-alias>predicted_class</remote-alias>
+            <ordinal>3</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>rmse</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[rmse]</local-name>
+            <parent-name>[model_1.csv]</parent-name>
+            <remote-alias>rmse</remote-alias>
+            <ordinal>4</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+        </metadata-records>
+      </connection>
+      <aliases enabled='yes' />
+      <column caption='accuracy' datatype='real' name='[Calculation_5645965856221134849]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='AVG(IF [actual_class] = [predicted_class] THEN 1 ELSE 0 END)' />
+      </column>
+      <column caption='actual = predicted' datatype='boolean' name='[Calculation_5645965856221458434]' role='dimension' type='nominal'>
+        <calculation class='tableau' formula='[actual_class] = [predicted_class]' />
+      </column>
+      <column datatype='integer' name='[Number of Records]' role='measure' type='quantitative' user:auto-column='numrec'>
+        <calculation class='tableau' formula='1' />
+      </column>
+      <column aggregation='None' datatype='integer' name='[Rmse (bin)]' role='dimension' type='quantitative'>
+        <calculation class='bin' decimals='-1' formula='[rmse]' peg='0' size='0.1' />
+      </column>
+      <column aggregation='Sum' caption='Actual Class' datatype='integer' name='[actual_class]' role='dimension' type='ordinal' />
+      <column caption='Image Id' datatype='string' name='[image_id]' role='dimension' type='nominal' />
+      <column caption='Image Type' datatype='string' name='[image_type]' role='dimension' type='nominal' />
+      <column aggregation='Sum' caption='Predicted Class' datatype='integer' name='[predicted_class]' role='dimension' type='ordinal' />
+      <column caption='Rmse' datatype='real' name='[rmse]' role='measure' type='quantitative' />
+      <layout dim-ordering='alphabetic' dim-percentage='0.528278' measure-ordering='alphabetic' measure-percentage='0.471722' show-structure='true' />
+      <semantic-values>
+        <semantic-value key='[Country].[Name]' value='&quot;United States&quot;' />
+      </semantic-values>
+    </datasource>
+    <datasource hasconnection='false' inline='true' name='Parameters' version='18.1'>
+      <aliases enabled='yes' />
+      <column caption='threshold_distance' datatype='integer' name='[Parameter 1]' param-domain-type='any' role='measure' type='quantitative' value='4'>
+        <calculation class='tableau' formula='4' />
+      </column>
+    </datasource>
+    <datasource caption='model_errors' inline='true' name='federated.13xcr33114tki618y56ut17wy76q' version='18.1'>
+      <connection class='federated'>
+        <named-connections>
+          <named-connection caption='model_errors' name='textscan.15py8j505rjs1010uxi2i0vtw2xa'>
+            <connection class='textscan' directory='/Users/paulabartabajo/src/put-it-on-the-map-challenge/eda' filename='model_errors.csv' password='' server='' />
+          </named-connection>
+        </named-connections>
+        <relation connection='textscan.15py8j505rjs1010uxi2i0vtw2xa' name='model_errors.csv' table='[model_errors#csv]' type='table'>
+          <columns character-set='UTF-8' header='yes' locale='en_US' separator=','>
+            <column datatype='integer' name='F1' ordinal='0' />
+            <column datatype='string' name='id' ordinal='1' />
+            <column datatype='integer' name='predicted' ordinal='2' />
+            <column datatype='integer' name='actual' ordinal='3' />
+            <column datatype='string' name='image_type' ordinal='4' />
+            <column datatype='real' name='rmse' ordinal='5' />
+          </columns>
+        </relation>
+        <metadata-records>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[model_errors.csv]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='character-set'>&quot;UTF-8&quot;</attribute>
+              <attribute datatype='string' name='collation'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='field-delimiter'>&quot;,&quot;</attribute>
+              <attribute datatype='string' name='header-row'>&quot;true&quot;</attribute>
+              <attribute datatype='string' name='locale'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='single-char'>&quot;&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>F1</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[F1]</local-name>
+            <parent-name>[model_errors.csv]</parent-name>
+            <remote-alias>F1</remote-alias>
+            <ordinal>0</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>id</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[id]</local-name>
+            <parent-name>[model_errors.csv]</parent-name>
+            <remote-alias>id</remote-alias>
+            <ordinal>1</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>predicted</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[predicted]</local-name>
+            <parent-name>[model_errors.csv]</parent-name>
+            <remote-alias>predicted</remote-alias>
+            <ordinal>2</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>actual</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[actual]</local-name>
+            <parent-name>[model_errors.csv]</parent-name>
+            <remote-alias>actual</remote-alias>
+            <ordinal>3</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>image_type</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[image_type]</local-name>
+            <parent-name>[model_errors.csv]</parent-name>
+            <remote-alias>image_type</remote-alias>
+            <ordinal>4</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>rmse</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[rmse]</local-name>
+            <parent-name>[model_errors.csv]</parent-name>
+            <remote-alias>rmse</remote-alias>
+            <ordinal>5</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+        </metadata-records>
+      </connection>
+      <aliases enabled='yes' />
+      <column caption='class_prediction_accuracy' datatype='string' name='[Calculation_1845912931198816256]' role='dimension' type='nominal'>
+        <calculation class='tableau' formula='if [actual] = [predicted] then &apos;Correct cluster&apos;&#10;else &apos;Incorrect cluster&apos;&#10;end' />
+      </column>
+      <column caption='accuracy' datatype='real' name='[Calculation_521573165308649472]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='AVG(IF [actual] = [predicted] then 1 else 0 end)' />
+      </column>
+      <column datatype='integer' name='[Number of Records]' role='measure' type='quantitative' user:auto-column='numrec'>
+        <calculation class='tableau' formula='1' />
+      </column>
+      <column aggregation='Sum' caption='Actual' datatype='integer' name='[actual]' role='dimension' type='ordinal' />
+      <column caption='Id' datatype='string' name='[id]' role='dimension' type='nominal' />
+      <column caption='Image Type' datatype='string' name='[image_type]' role='dimension' type='nominal' />
+      <column aggregation='Sum' caption='Predicted' datatype='integer' name='[predicted]' role='dimension' type='ordinal' />
+      <column aggregation='None' datatype='integer' name='[rmse (bin)]' role='dimension' type='quantitative'>
+        <calculation class='bin' decimals='-1' formula='[rmse]' peg='0' size='0.1' />
+      </column>
+      <column datatype='real' name='[rmse]' role='measure' type='quantitative' />
+      <layout dim-ordering='alphabetic' dim-percentage='0.526909' measure-ordering='alphabetic' measure-percentage='0.473091' show-structure='true' />
+      <semantic-values>
+        <semantic-value key='[Country].[Name]' value='&quot;United States&quot;' />
+      </semantic-values>
+    </datasource>
+    <datasource caption='cluster_distances' inline='true' name='federated.1e5rusk07q916o12yeyws0ok8afz' version='18.1'>
+      <connection class='federated'>
+        <named-connections>
+          <named-connection caption='cluster_distances' name='textscan.1kg2tu31v8fvwz1bgk1yc0kj4st9'>
+            <connection class='textscan' directory='/Users/paulabartabajo/src/put-it-on-the-map-challenge/eda' filename='cluster_distances.csv' password='' server='' />
+          </named-connection>
+        </named-connections>
+        <relation connection='textscan.1kg2tu31v8fvwz1bgk1yc0kj4st9' name='cluster_distances.csv' table='[cluster_distances#csv]' type='table'>
+          <columns character-set='UTF-8' header='yes' locale='en_US' separator=','>
+            <column datatype='integer' name='cluster_1' ordinal='0' />
+            <column datatype='integer' name='cluster_2' ordinal='1' />
+            <column datatype='real' name='distance' ordinal='2' />
+          </columns>
+        </relation>
+        <metadata-records>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[cluster_distances.csv]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='character-set'>&quot;UTF-8&quot;</attribute>
+              <attribute datatype='string' name='collation'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='field-delimiter'>&quot;,&quot;</attribute>
+              <attribute datatype='string' name='header-row'>&quot;true&quot;</attribute>
+              <attribute datatype='string' name='locale'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='single-char'>&quot;&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>cluster_1</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[cluster_1]</local-name>
+            <parent-name>[cluster_distances.csv]</parent-name>
+            <remote-alias>cluster_1</remote-alias>
+            <ordinal>0</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>cluster_2</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[cluster_2]</local-name>
+            <parent-name>[cluster_distances.csv]</parent-name>
+            <remote-alias>cluster_2</remote-alias>
+            <ordinal>1</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>distance</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[distance]</local-name>
+            <parent-name>[cluster_distances.csv]</parent-name>
+            <remote-alias>distance</remote-alias>
+            <ordinal>2</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+        </metadata-records>
+      </connection>
+      <aliases enabled='yes' />
+      <column caption='near_far' datatype='string' name='[Calculation_5645965856280035331]' role='dimension' type='nominal'>
+        <calculation class='tableau' formula='if [distance] &lt;= [Parameters].[Parameter 1] then &apos;near&apos; else &apos;far&apos; end' />
+      </column>
+      <column datatype='integer' name='[Number of Records]' role='measure' type='quantitative' user:auto-column='numrec'>
+        <calculation class='tableau' formula='1' />
+      </column>
+      <column aggregation='Sum' caption='Cluster 1' datatype='integer' name='[cluster_1]' role='dimension' type='ordinal' />
+      <column aggregation='Sum' caption='Cluster 2' datatype='integer' name='[cluster_2]' role='dimension' type='ordinal' />
+      <column caption='Distance' datatype='real' name='[distance]' role='measure' type='quantitative' />
+      <column-instance column='[Calculation_5645965856280035331]' derivation='None' name='[none:Calculation_5645965856280035331:nk]' pivot='key' type='nominal' />
+      <layout dim-ordering='alphabetic' dim-percentage='0.371233' measure-ordering='alphabetic' measure-percentage='0.342466' parameter-percentage='0.286301' show-structure='true' />
+      <style>
+        <style-rule element='mark'>
+          <encoding attr='color' field='[none:Calculation_5645965856280035331:nk]' type='palette'>
+            <map to='#59a14f'>
+              <bucket>&quot;near&quot;</bucket>
+            </map>
+            <map to='#d5d5d5'>
+              <bucket>&quot;far&quot;</bucket>
+            </map>
+          </encoding>
+        </style-rule>
+      </style>
+      <semantic-values>
+        <semantic-value key='[Country].[Name]' value='&quot;United States&quot;' />
+      </semantic-values>
+      <datasource-dependencies datasource='Parameters'>
+        <column caption='threshold_distance' datatype='integer' name='[Parameter 1]' param-domain-type='any' role='measure' type='quantitative' value='4'>
+          <calculation class='tableau' formula='4' />
+        </column>
+      </datasource-dependencies>
+    </datasource>
+    <datasource caption='metadata' inline='true' name='federated.1hq96zw1ykdvhc1ah588j047104q' version='18.1'>
+      <connection class='federated'>
+        <named-connections>
+          <named-connection caption='metadata' name='textscan.1fdek9y0wong9i15duoqa01qp3u7'>
+            <connection class='textscan' directory='/Users/paulabartabajo/src/put-it-on-the-map-challenge/eda' filename='metadata.csv' password='' server='' />
+          </named-connection>
+        </named-connections>
+        <relation connection='textscan.1fdek9y0wong9i15duoqa01qp3u7' name='metadata.csv' table='[metadata#csv]' type='table'>
+          <columns character-set='UTF-8' header='yes' locale='en_US' separator=','>
+            <column datatype='string' name='image_id' ordinal='0' />
+            <column datatype='integer' name='cluster' ordinal='1' />
+            <column datatype='integer' name='px_per_lon_ratio' ordinal='2' />
+            <column datatype='real' name='px_per_lat_ratio' ordinal='3' />
+            <column datatype='real' name='ll_lon' ordinal='4' />
+            <column datatype='real' name='ll_lat' ordinal='5' />
+            <column datatype='real' name='ur_lon' ordinal='6' />
+            <column datatype='real' name='ur_lat' ordinal='7' />
+            <column datatype='real' name='distance_to_center' ordinal='8' />
+          </columns>
+        </relation>
+        <metadata-records>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[metadata.csv]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='character-set'>&quot;UTF-8&quot;</attribute>
+              <attribute datatype='string' name='collation'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='field-delimiter'>&quot;,&quot;</attribute>
+              <attribute datatype='string' name='header-row'>&quot;true&quot;</attribute>
+              <attribute datatype='string' name='locale'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='single-char'>&quot;&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>image_id</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[image_id]</local-name>
+            <parent-name>[metadata.csv]</parent-name>
+            <remote-alias>image_id</remote-alias>
+            <ordinal>0</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>cluster</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[cluster]</local-name>
+            <parent-name>[metadata.csv]</parent-name>
+            <remote-alias>cluster</remote-alias>
+            <ordinal>1</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>px_per_lon_ratio</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[px_per_lon_ratio]</local-name>
+            <parent-name>[metadata.csv]</parent-name>
+            <remote-alias>px_per_lon_ratio</remote-alias>
+            <ordinal>2</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>px_per_lat_ratio</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[px_per_lat_ratio]</local-name>
+            <parent-name>[metadata.csv]</parent-name>
+            <remote-alias>px_per_lat_ratio</remote-alias>
+            <ordinal>3</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>ll_lon</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[ll_lon]</local-name>
+            <parent-name>[metadata.csv]</parent-name>
+            <remote-alias>ll_lon</remote-alias>
+            <ordinal>4</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>ll_lat</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[ll_lat]</local-name>
+            <parent-name>[metadata.csv]</parent-name>
+            <remote-alias>ll_lat</remote-alias>
+            <ordinal>5</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>ur_lon</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[ur_lon]</local-name>
+            <parent-name>[metadata.csv]</parent-name>
+            <remote-alias>ur_lon</remote-alias>
+            <ordinal>6</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>ur_lat</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[ur_lat]</local-name>
+            <parent-name>[metadata.csv]</parent-name>
+            <remote-alias>ur_lat</remote-alias>
+            <ordinal>7</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>distance_to_center</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[distance_to_center]</local-name>
+            <parent-name>[metadata.csv]</parent-name>
+            <remote-alias>distance_to_center</remote-alias>
+            <ordinal>8</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+        </metadata-records>
+      </connection>
+      <aliases enabled='yes' />
+      <column datatype='integer' name='[Number of Records]' role='measure' type='quantitative' user:auto-column='numrec'>
+        <calculation class='tableau' formula='1' />
+      </column>
+      <column aggregation='None' datatype='integer' name='[Px Per Lat Ratio (bin)]' role='dimension' type='quantitative'>
+        <calculation class='bin' decimals='1' formula='[px_per_lat_ratio]' peg='0' size='10' />
+      </column>
+      <column aggregation='None' datatype='integer' name='[Px Per Lon Ratio (bin)]' role='dimension' type='quantitative'>
+        <calculation class='bin' decimals='1' formula='[px_per_lon_ratio]' peg='0' size='10' />
+      </column>
+      <column aggregation='Sum' caption='Cluster' datatype='integer' name='[cluster]' role='dimension' type='ordinal' />
+      <column aggregation='None' datatype='integer' name='[distance_to_center (bin)]' role='dimension' type='quantitative'>
+        <calculation class='bin' decimals='-1' formula='[distance_to_center]' peg='0' size='0.5' />
+      </column>
+      <column datatype='real' name='[distance_to_center]' role='measure' type='quantitative' />
+      <column caption='Image Id' datatype='string' name='[image_id]' role='dimension' type='nominal' />
+      <column aggregation='Avg' caption='Ll Lat' datatype='real' name='[ll_lat]' role='measure' semantic-role='[Geographical].[Latitude]' type='quantitative' />
+      <column aggregation='Avg' caption='Ll Lon' datatype='real' name='[ll_lon]' role='measure' semantic-role='[Geographical].[Longitude]' type='quantitative' />
+      <column aggregation='Avg' caption='Px Per Lat Ratio' datatype='real' name='[px_per_lat_ratio]' role='measure' semantic-role='' type='quantitative' />
+      <column aggregation='Avg' caption='Px Per Lon Ratio' datatype='integer' name='[px_per_lon_ratio]' role='measure' semantic-role='' type='quantitative' />
+      <column aggregation='Avg' caption='Ur Lat' datatype='real' name='[ur_lat]' role='measure' semantic-role='[Geographical].[Latitude]' type='quantitative' />
+      <column aggregation='Avg' caption='Ur Lon' datatype='real' name='[ur_lon]' role='measure' semantic-role='[Geographical].[Longitude]' type='quantitative' />
+      <layout dim-ordering='alphabetic' dim-percentage='0.352609' measure-ordering='alphabetic' measure-percentage='0.441467' parameter-percentage='0.205924' show-structure='true' />
+      <semantic-values>
+        <semantic-value key='[Country].[Name]' value='&quot;United States&quot;' />
+      </semantic-values>
+    </datasource>
+    <datasource caption='model_probs' inline='true' name='federated.0zsy4w70er7gue1fcp2mf1iobc85' version='18.1'>
+      <connection class='federated'>
+        <named-connections>
+          <named-connection caption='model_probs' name='textscan.003a5po1o65p4118c01g81qtmzum'>
+            <connection class='textscan' directory='/Users/paulabartabajo/src/put-it-on-the-map-challenge/eda' filename='model_probs.csv' password='' server='' />
+          </named-connection>
+        </named-connections>
+        <relation connection='textscan.003a5po1o65p4118c01g81qtmzum' name='model_probs.csv' table='[model_probs#csv]' type='table'>
+          <columns character-set='UTF-8' header='yes' locale='en_US' separator=','>
+            <column datatype='real' name='0' ordinal='0' />
+            <column datatype='real' name='1' ordinal='1' />
+            <column datatype='real' name='2' ordinal='2' />
+            <column datatype='real' name='3' ordinal='3' />
+            <column datatype='real' name='4' ordinal='4' />
+            <column datatype='real' name='5' ordinal='5' />
+            <column datatype='real' name='6' ordinal='6' />
+            <column datatype='real' name='7' ordinal='7' />
+            <column datatype='real' name='8' ordinal='8' />
+            <column datatype='real' name='9' ordinal='9' />
+            <column datatype='boolean' name='model_is_right' ordinal='10' />
+          </columns>
+        </relation>
+        <metadata-records>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[model_probs.csv]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='character-set'>&quot;UTF-8&quot;</attribute>
+              <attribute datatype='string' name='collation'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='field-delimiter'>&quot;,&quot;</attribute>
+              <attribute datatype='string' name='header-row'>&quot;true&quot;</attribute>
+              <attribute datatype='string' name='locale'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='single-char'>&quot;&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>0</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[0]</local-name>
+            <parent-name>[model_probs.csv]</parent-name>
+            <remote-alias>0</remote-alias>
+            <ordinal>0</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>1</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[1]</local-name>
+            <parent-name>[model_probs.csv]</parent-name>
+            <remote-alias>1</remote-alias>
+            <ordinal>1</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>2</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[2]</local-name>
+            <parent-name>[model_probs.csv]</parent-name>
+            <remote-alias>2</remote-alias>
+            <ordinal>2</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>3</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[3]</local-name>
+            <parent-name>[model_probs.csv]</parent-name>
+            <remote-alias>3</remote-alias>
+            <ordinal>3</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>4</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[4]</local-name>
+            <parent-name>[model_probs.csv]</parent-name>
+            <remote-alias>4</remote-alias>
+            <ordinal>4</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>5</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[5]</local-name>
+            <parent-name>[model_probs.csv]</parent-name>
+            <remote-alias>5</remote-alias>
+            <ordinal>5</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>6</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[6]</local-name>
+            <parent-name>[model_probs.csv]</parent-name>
+            <remote-alias>6</remote-alias>
+            <ordinal>6</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>7</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[7]</local-name>
+            <parent-name>[model_probs.csv]</parent-name>
+            <remote-alias>7</remote-alias>
+            <ordinal>7</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>8</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[8]</local-name>
+            <parent-name>[model_probs.csv]</parent-name>
+            <remote-alias>8</remote-alias>
+            <ordinal>8</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>9</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[9]</local-name>
+            <parent-name>[model_probs.csv]</parent-name>
+            <remote-alias>9</remote-alias>
+            <ordinal>9</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>model_is_right</remote-name>
+            <remote-type>11</remote-type>
+            <local-name>[model_is_right]</local-name>
+            <parent-name>[model_probs.csv]</parent-name>
+            <remote-alias>model_is_right</remote-alias>
+            <ordinal>10</ordinal>
+            <local-type>boolean</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+        </metadata-records>
+      </connection>
+      <aliases enabled='yes' />
+      <column aggregation='None' datatype='integer' name='[0 (bin)]' role='dimension' type='quantitative'>
+        <calculation class='bin' decimals='-2' formula='[0]' peg='0' size='0.01' />
+      </column>
+      <column aggregation='None' datatype='integer' name='[0+1 (bin)]' role='dimension' type='quantitative'>
+        <calculation class='bin' decimals='-2' formula='[Calculation_5645965858525286405]' peg='0' size='0.01' />
+      </column>
+      <column aggregation='Sum' datatype='real' name='[0]' role='dimension' type='ordinal' />
+      <column caption='accuracy' datatype='integer' name='[Calculation_5645965858521665540]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='if [model_is_right] then 1 else 0 end' />
+      </column>
+      <column caption='0+1' datatype='real' name='[Calculation_5645965858525286405]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='[0]+[1]' />
+      </column>
+      <column datatype='integer' name='[Number of Records]' role='measure' type='quantitative' user:auto-column='numrec'>
+        <calculation class='tableau' formula='1' />
+      </column>
+      <column caption='Model Is Right' datatype='boolean' name='[model_is_right]' role='dimension' type='nominal' />
+      <column-instance column='[Calculation_5645965858521665540]' derivation='Avg' name='[avg:Calculation_5645965858521665540:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[0]' derivation='Count' name='[cnt:0:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[0]' derivation='Count' name='[pcto:cnt:0:qk]' pivot='key' type='quantitative'>
+        <table-calc ordering-type='Rows' type='PctTotal' />
+      </column-instance>
+      <layout dim-ordering='alphabetic' dim-percentage='0.245416' measure-ordering='alphabetic' measure-percentage='0.538787' parameter-percentage='0.215797' show-structure='true' />
+      <style>
+        <style-rule element='mark'>
+          <encoding attr='color' field='[:Measure Names]' type='palette'>
+            <map to='#4e79a7'>
+              <bucket>&quot;[federated.0zsy4w70er7gue1fcp2mf1iobc85].[avg:Calculation_5645965858521665540:qk]&quot;</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>&quot;[federated.0zsy4w70er7gue1fcp2mf1iobc85].[cnt:0:qk]&quot;</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>&quot;[federated.0zsy4w70er7gue1fcp2mf1iobc85].[pcto:cnt:0:qk]&quot;</bucket>
+            </map>
+          </encoding>
+        </style-rule>
+      </style>
+      <semantic-values>
+        <semantic-value key='[Country].[Name]' value='&quot;United States&quot;' />
+      </semantic-values>
+    </datasource>
+  </datasources>
+  <actions>
+    <action caption='Highlight 1 (generated)' name='[Action1]'>
+      <activation auto-clear='true' type='on-select' />
+      <source type='sheet' worksheet='Sheet 11' />
+      <command command='tsc:brush'>
+        <param name='field-captions' value='near_far' />
+        <param name='target' value='Sheet 11' />
+      </command>
+    </action>
+  </actions>
+  <worksheets>
+    <worksheet name='M1: accuracy'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='model_1' name='federated.1sdhlwk1l7ac5816ouqq41j4074i' />
+          </datasources>
+          <datasource-dependencies datasource='federated.1sdhlwk1l7ac5816ouqq41j4074i'>
+            <column caption='accuracy' datatype='real' name='[Calculation_5645965856221134849]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='AVG(IF [actual_class] = [predicted_class] THEN 1 ELSE 0 END)' />
+            </column>
+            <column aggregation='Sum' caption='Actual Class' datatype='integer' name='[actual_class]' role='dimension' type='ordinal' />
+            <column aggregation='Sum' caption='Predicted Class' datatype='integer' name='[predicted_class]' role='dimension' type='ordinal' />
+            <column-instance column='[Calculation_5645965856221134849]' derivation='User' name='[usr:Calculation_5645965856221134849:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style />
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <text column='[federated.1sdhlwk1l7ac5816ouqq41j4074i].[usr:Calculation_5645965856221134849:qk]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-show' value='true' />
+                <format attr='mark-labels-cull' value='true' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows />
+        <cols />
+      </table>
+      <simple-id uuid='{00C0A731-37FB-4C3A-87CD-B86084F112D9}' />
+    </worksheet>
+    <worksheet name='M1: average error'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='model_1' name='federated.1sdhlwk1l7ac5816ouqq41j4074i' />
+          </datasources>
+          <datasource-dependencies datasource='federated.1sdhlwk1l7ac5816ouqq41j4074i'>
+            <column caption='actual = predicted' datatype='boolean' name='[Calculation_5645965856221458434]' role='dimension' type='nominal'>
+              <calculation class='tableau' formula='[actual_class] = [predicted_class]' />
+            </column>
+            <column datatype='integer' name='[Number of Records]' role='measure' type='quantitative' user:auto-column='numrec'>
+              <calculation class='tableau' formula='1' />
+            </column>
+            <column aggregation='Sum' caption='Actual Class' datatype='integer' name='[actual_class]' role='dimension' type='ordinal' />
+            <column-instance column='[rmse]' derivation='Avg' name='[avg:rmse:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Calculation_5645965856221458434]' derivation='None' name='[none:Calculation_5645965856221458434:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Number of Records]' derivation='Sum' name='[pcto:sum:Number of Records:qk]' pivot='key' type='quantitative'>
+              <table-calc ordering-type='Rows' type='PctTotal' />
+            </column-instance>
+            <column aggregation='Sum' caption='Predicted Class' datatype='integer' name='[predicted_class]' role='dimension' type='ordinal' />
+            <column caption='Rmse' datatype='real' name='[rmse]' role='measure' type='quantitative' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='cell'>
+            <format attr='text-format' field='[federated.1sdhlwk1l7ac5816ouqq41j4074i].[pcto:sum:Number of Records:qk]' value='p0%' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <text column='[federated.1sdhlwk1l7ac5816ouqq41j4074i].[avg:rmse:qk]' />
+              <text column='[federated.1sdhlwk1l7ac5816ouqq41j4074i].[pcto:sum:Number of Records:qk]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-show' value='true' />
+                <format attr='mark-labels-cull' value='true' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>[federated.1sdhlwk1l7ac5816ouqq41j4074i].[avg:rmse:qk]</rows>
+        <cols total='true'>[federated.1sdhlwk1l7ac5816ouqq41j4074i].[none:Calculation_5645965856221458434:nk]</cols>
+        <show-full-range>
+          <column>[federated.1sdhlwk1l7ac5816ouqq41j4074i].[Rmse (bin)]</column>
+        </show-full-range>
+      </table>
+      <simple-id uuid='{123CE41F-B890-4700-AF99-5261156D4994}' />
+    </worksheet>
+    <worksheet name='M1: confusion matrix'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='model_1' name='federated.1sdhlwk1l7ac5816ouqq41j4074i' />
+          </datasources>
+          <datasource-dependencies datasource='federated.1sdhlwk1l7ac5816ouqq41j4074i'>
+            <column datatype='integer' name='[Number of Records]' role='measure' type='quantitative' user:auto-column='numrec'>
+              <calculation class='tableau' formula='1' />
+            </column>
+            <column aggregation='Sum' caption='Actual Class' datatype='integer' name='[actual_class]' role='dimension' type='ordinal' />
+            <column-instance column='[actual_class]' derivation='None' name='[none:actual_class:ok]' pivot='key' type='ordinal' />
+            <column-instance column='[predicted_class]' derivation='None' name='[none:predicted_class:ok]' pivot='key' type='ordinal' />
+            <column aggregation='Sum' caption='Predicted Class' datatype='integer' name='[predicted_class]' role='dimension' type='ordinal' />
+            <column-instance column='[Number of Records]' derivation='Sum' name='[sum:Number of Records:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style />
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <color column='[federated.1sdhlwk1l7ac5816ouqq41j4074i].[sum:Number of Records:qk]' />
+            </encodings>
+          </pane>
+        </panes>
+        <rows>[federated.1sdhlwk1l7ac5816ouqq41j4074i].[none:predicted_class:ok]</rows>
+        <cols>[federated.1sdhlwk1l7ac5816ouqq41j4074i].[none:actual_class:ok]</cols>
+      </table>
+      <simple-id uuid='{91913559-AE59-45B9-92D0-9E9B31F33F56}' />
+    </worksheet>
+    <worksheet name='M1: rmse per class'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='model_1' name='federated.1sdhlwk1l7ac5816ouqq41j4074i' />
+          </datasources>
+          <datasource-dependencies datasource='federated.1sdhlwk1l7ac5816ouqq41j4074i'>
+            <column aggregation='Sum' caption='Actual Class' datatype='integer' name='[actual_class]' role='dimension' type='ordinal' />
+            <column-instance column='[rmse]' derivation='Avg' name='[avg:rmse:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[actual_class]' derivation='None' name='[none:actual_class:ok]' pivot='key' type='ordinal' />
+            <column caption='Rmse' datatype='real' name='[rmse]' role='measure' type='quantitative' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style />
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Square' />
+            <encodings>
+              <color column='[federated.1sdhlwk1l7ac5816ouqq41j4074i].[avg:rmse:qk]' />
+              <text column='[federated.1sdhlwk1l7ac5816ouqq41j4074i].[avg:rmse:qk]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-show' value='true' />
+                <format attr='mark-labels-cull' value='true' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>[federated.1sdhlwk1l7ac5816ouqq41j4074i].[none:actual_class:ok]</rows>
+        <cols />
+      </table>
+      <simple-id uuid='{02EB2289-FD01-44A0-8491-82982483DEF7}' />
+    </worksheet>
+    <worksheet name='Sheet 1'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='model_errors' name='federated.13xcr33114tki618y56ut17wy76q' />
+          </datasources>
+          <datasource-dependencies datasource='federated.13xcr33114tki618y56ut17wy76q'>
+            <column datatype='integer' name='[Number of Records]' role='measure' type='quantitative' user:auto-column='numrec'>
+              <calculation class='tableau' formula='1' />
+            </column>
+            <column aggregation='Sum' caption='Actual' datatype='integer' name='[actual]' role='dimension' type='ordinal' />
+            <column caption='Image Type' datatype='string' name='[image_type]' role='dimension' type='nominal' />
+            <column-instance column='[actual]' derivation='None' name='[none:actual:ok]' pivot='key' type='ordinal' />
+            <column-instance column='[image_type]' derivation='None' name='[none:image_type:nk]' pivot='key' type='nominal' />
+            <column-instance column='[predicted]' derivation='None' name='[none:predicted:ok]' pivot='key' type='ordinal' />
+            <column aggregation='Sum' caption='Predicted' datatype='integer' name='[predicted]' role='dimension' type='ordinal' />
+            <column-instance column='[Number of Records]' derivation='Sum' name='[sum:Number of Records:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='label'>
+            <format attr='font-size' field='[federated.13xcr33114tki618y56ut17wy76q].[none:predicted:ok]' value='8' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <color column='[federated.13xcr33114tki618y56ut17wy76q].[sum:Number of Records:qk]' />
+            </encodings>
+          </pane>
+        </panes>
+        <rows>[federated.13xcr33114tki618y56ut17wy76q].[none:actual:ok]</rows>
+        <cols>([federated.13xcr33114tki618y56ut17wy76q].[none:image_type:nk] / [federated.13xcr33114tki618y56ut17wy76q].[none:predicted:ok])</cols>
+      </table>
+      <simple-id uuid='{A52BE651-F66F-47B4-A4F7-3A509574987C}' />
+    </worksheet>
+    <worksheet name='Sheet 11'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='cluster_distances' name='federated.1e5rusk07q916o12yeyws0ok8afz' />
+            <datasource name='Parameters' />
+          </datasources>
+          <datasource-dependencies datasource='Parameters'>
+            <column caption='threshold_distance' datatype='integer' name='[Parameter 1]' param-domain-type='any' role='measure' type='quantitative' value='4'>
+              <calculation class='tableau' formula='4' />
+            </column>
+          </datasource-dependencies>
+          <datasource-dependencies datasource='federated.1e5rusk07q916o12yeyws0ok8afz'>
+            <column caption='near_far' datatype='string' name='[Calculation_5645965856280035331]' role='dimension' type='nominal'>
+              <calculation class='tableau' formula='if [distance] &lt;= [Parameters].[Parameter 1] then &apos;near&apos; else &apos;far&apos; end' />
+            </column>
+            <column aggregation='Sum' caption='Cluster 1' datatype='integer' name='[cluster_1]' role='dimension' type='ordinal' />
+            <column aggregation='Sum' caption='Cluster 2' datatype='integer' name='[cluster_2]' role='dimension' type='ordinal' />
+            <column caption='Distance' datatype='real' name='[distance]' role='measure' type='quantitative' />
+            <column-instance column='[Calculation_5645965856280035331]' derivation='None' name='[none:Calculation_5645965856280035331:nk]' pivot='key' type='nominal' />
+            <column-instance column='[cluster_1]' derivation='None' name='[none:cluster_1:ok]' pivot='key' type='ordinal' />
+            <column-instance column='[cluster_2]' derivation='None' name='[none:cluster_2:ok]' pivot='key' type='ordinal' />
+            <column-instance column='[distance]' derivation='Sum' name='[sum:distance:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <filter class='categorical' column='[federated.1e5rusk07q916o12yeyws0ok8afz].[none:cluster_1:ok]'>
+            <groupfilter function='member' level='[none:cluster_1:ok]' member='35' user:ui-domain='relevant' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+          </filter>
+          <filter class='categorical' column='[federated.1e5rusk07q916o12yeyws0ok8afz].[none:cluster_2:ok]'>
+            <groupfilter function='member' level='[none:cluster_2:ok]' member='298' user:ui-domain='relevant' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+          </filter>
+          <slices>
+            <column>[federated.1e5rusk07q916o12yeyws0ok8afz].[none:cluster_1:ok]</column>
+            <column>[federated.1e5rusk07q916o12yeyws0ok8afz].[none:cluster_2:ok]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style />
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Square' />
+            <encodings>
+              <color column='[federated.1e5rusk07q916o12yeyws0ok8afz].[none:Calculation_5645965856280035331:nk]' />
+              <text column='[federated.1e5rusk07q916o12yeyws0ok8afz].[sum:distance:qk]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-show' value='true' />
+                <format attr='mark-labels-cull' value='true' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>[federated.1e5rusk07q916o12yeyws0ok8afz].[none:cluster_1:ok]</rows>
+        <cols>[federated.1e5rusk07q916o12yeyws0ok8afz].[none:cluster_2:ok]</cols>
+      </table>
+      <simple-id uuid='{800FDB14-C3EF-4E48-941A-E31DA54E4701}' />
+    </worksheet>
+    <worksheet name='Sheet 12'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='cluster_distances' name='federated.1e5rusk07q916o12yeyws0ok8afz' />
+            <datasource name='Parameters' />
+          </datasources>
+          <datasource-dependencies datasource='Parameters'>
+            <column caption='threshold_distance' datatype='integer' name='[Parameter 1]' param-domain-type='any' role='measure' type='quantitative' value='4'>
+              <calculation class='tableau' formula='4' />
+            </column>
+          </datasource-dependencies>
+          <datasource-dependencies datasource='federated.1e5rusk07q916o12yeyws0ok8afz'>
+            <column caption='near_far' datatype='string' name='[Calculation_5645965856280035331]' role='dimension' type='nominal'>
+              <calculation class='tableau' formula='if [distance] &lt;= [Parameters].[Parameter 1] then &apos;near&apos; else &apos;far&apos; end' />
+            </column>
+            <column datatype='integer' name='[Number of Records]' role='measure' type='quantitative' user:auto-column='numrec'>
+              <calculation class='tableau' formula='1' />
+            </column>
+            <column caption='Distance' datatype='real' name='[distance]' role='measure' type='quantitative' />
+            <column-instance column='[Calculation_5645965856280035331]' derivation='None' name='[none:Calculation_5645965856280035331:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Number of Records]' derivation='Sum' name='[pcto:sum:Number of Records:qk]' pivot='key' type='quantitative'>
+              <table-calc ordering-type='Rows' type='PctTotal' />
+            </column-instance>
+            <column-instance column='[Number of Records]' derivation='Sum' name='[sum:Number of Records:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style />
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <text column='[federated.1e5rusk07q916o12yeyws0ok8afz].[pcto:sum:Number of Records:qk]' />
+              <text column='[federated.1e5rusk07q916o12yeyws0ok8afz].[sum:Number of Records:qk]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-show' value='true' />
+                <format attr='mark-labels-cull' value='true' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>[federated.1e5rusk07q916o12yeyws0ok8afz].[sum:Number of Records:qk]</rows>
+        <cols>[federated.1e5rusk07q916o12yeyws0ok8afz].[none:Calculation_5645965856280035331:nk]</cols>
+      </table>
+      <simple-id uuid='{DEC04054-EB9E-4688-8607-335A6C3D106B}' />
+    </worksheet>
+    <worksheet name='Sheet 13'>
+      <table>
+        <view>
+          <datasources />
+          <aggregation value='true' />
+        </view>
+        <style />
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+          </pane>
+        </panes>
+        <rows />
+        <cols />
+      </table>
+      <simple-id uuid='{4D058A70-D972-41AA-958F-B841B9366772}' />
+    </worksheet>
+    <worksheet name='Sheet 19'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='model_probs' name='federated.0zsy4w70er7gue1fcp2mf1iobc85' />
+          </datasources>
+          <datasource-dependencies datasource='federated.0zsy4w70er7gue1fcp2mf1iobc85'>
+            <column aggregation='Sum' datatype='real' name='[0]' role='dimension' type='ordinal' />
+            <column-instance column='[0]' derivation='None' name='[none:0:ok]' pivot='key' type='ordinal' />
+          </datasource-dependencies>
+          <natural-sort column='[federated.0zsy4w70er7gue1fcp2mf1iobc85].[none:0:ok]' direction='DESC' />
+          <aggregation value='true' />
+        </view>
+        <style />
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+          </pane>
+        </panes>
+        <rows>[federated.0zsy4w70er7gue1fcp2mf1iobc85].[none:0:ok]</rows>
+        <cols />
+      </table>
+      <simple-id uuid='{AEAED259-6784-447A-BFA0-AC0768B4404F}' />
+    </worksheet>
+    <worksheet name='Sheet 2'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='model_errors' name='federated.13xcr33114tki618y56ut17wy76q' />
+          </datasources>
+          <datasource-dependencies datasource='federated.13xcr33114tki618y56ut17wy76q'>
+            <column caption='accuracy' datatype='real' name='[Calculation_521573165308649472]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='AVG(IF [actual] = [predicted] then 1 else 0 end)' />
+            </column>
+            <column aggregation='Sum' caption='Actual' datatype='integer' name='[actual]' role='dimension' type='ordinal' />
+            <column caption='Image Type' datatype='string' name='[image_type]' role='dimension' type='nominal' />
+            <column-instance column='[image_type]' derivation='None' name='[none:image_type:nk]' pivot='key' type='nominal' />
+            <column aggregation='Sum' caption='Predicted' datatype='integer' name='[predicted]' role='dimension' type='ordinal' />
+            <column-instance column='[Calculation_521573165308649472]' derivation='User' name='[usr:Calculation_521573165308649472:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='cell'>
+            <format attr='width' field='[federated.13xcr33114tki618y56ut17wy76q].[none:image_type:nk]' value='112' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <text column='[federated.13xcr33114tki618y56ut17wy76q].[usr:Calculation_521573165308649472:qk]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-cull' value='true' />
+                <format attr='mark-labels-show' value='true' />
+              </style-rule>
+              <style-rule element='pane'>
+                <format attr='minwidth' value='-1' />
+                <format attr='maxwidth' value='-1' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>[federated.13xcr33114tki618y56ut17wy76q].[usr:Calculation_521573165308649472:qk]</rows>
+        <cols>[federated.13xcr33114tki618y56ut17wy76q].[none:image_type:nk]</cols>
+      </table>
+      <simple-id uuid='{4F8D0547-B790-450C-A1D5-415670761EF0}' />
+    </worksheet>
+    <worksheet name='Sheet 9'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='model_1' name='federated.1sdhlwk1l7ac5816ouqq41j4074i' />
+          </datasources>
+          <datasource-dependencies datasource='federated.1sdhlwk1l7ac5816ouqq41j4074i'>
+            <column caption='actual = predicted' datatype='boolean' name='[Calculation_5645965856221458434]' role='dimension' type='nominal'>
+              <calculation class='tableau' formula='[actual_class] = [predicted_class]' />
+            </column>
+            <column aggregation='None' datatype='integer' name='[Rmse (bin)]' role='dimension' type='quantitative'>
+              <calculation class='bin' decimals='-1' formula='[rmse]' peg='0' size='0.1' />
+            </column>
+            <column aggregation='Sum' caption='Actual Class' datatype='integer' name='[actual_class]' role='dimension' type='ordinal' />
+            <column-instance column='[rmse]' derivation='Count' name='[cnt:rmse:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Calculation_5645965856221458434]' derivation='None' name='[none:Calculation_5645965856221458434:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Rmse (bin)]' derivation='None' name='[none:Rmse (bin):qk]' pivot='key' type='quantitative' />
+            <column aggregation='Sum' caption='Predicted Class' datatype='integer' name='[predicted_class]' role='dimension' type='ordinal' />
+            <column caption='Rmse' datatype='real' name='[rmse]' role='measure' type='quantitative' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style />
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <mark-sizing custom-mark-size-in-axis-units='1.0' mark-alignment='mark-alignment-left' mark-sizing-setting='marks-scaling-on' use-custom-mark-size='false' />
+          </pane>
+        </panes>
+        <rows>([federated.1sdhlwk1l7ac5816ouqq41j4074i].[none:Calculation_5645965856221458434:nk] * [federated.1sdhlwk1l7ac5816ouqq41j4074i].[cnt:rmse:qk])</rows>
+        <cols>[federated.1sdhlwk1l7ac5816ouqq41j4074i].[none:Rmse (bin):qk]</cols>
+        <show-full-range>
+          <column>[federated.1sdhlwk1l7ac5816ouqq41j4074i].[Rmse (bin)]</column>
+        </show-full-range>
+      </table>
+      <simple-id uuid='{9CBE2910-CBEB-4287-904E-730710CDE6A6}' />
+    </worksheet>
+    <worksheet name='accuracy per class'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='model_errors' name='federated.13xcr33114tki618y56ut17wy76q' />
+          </datasources>
+          <datasource-dependencies datasource='federated.13xcr33114tki618y56ut17wy76q'>
+            <column caption='accuracy' datatype='real' name='[Calculation_521573165308649472]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='AVG(IF [actual] = [predicted] then 1 else 0 end)' />
+            </column>
+            <column datatype='integer' name='[Number of Records]' role='measure' type='quantitative' user:auto-column='numrec'>
+              <calculation class='tableau' formula='1' />
+            </column>
+            <column aggregation='Sum' caption='Actual' datatype='integer' name='[actual]' role='dimension' type='ordinal' />
+            <column-instance column='[actual]' derivation='None' name='[none:actual:ok]' pivot='key' type='ordinal' />
+            <column aggregation='Sum' caption='Predicted' datatype='integer' name='[predicted]' role='dimension' type='ordinal' />
+            <column-instance column='[Number of Records]' derivation='Sum' name='[sum:Number of Records:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Calculation_521573165308649472]' derivation='User' name='[usr:Calculation_521573165308649472:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <computed-sort column='[federated.13xcr33114tki618y56ut17wy76q].[none:actual:ok]' direction='DESC' using='[federated.13xcr33114tki618y56ut17wy76q].[sum:Number of Records:qk]' />
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='mark'>
+            <encoding attr='color' field='[federated.13xcr33114tki618y56ut17wy76q].[usr:Calculation_521573165308649472:qk]' palette='red_green_diverging_10_0' type='interpolated' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <color column='[federated.13xcr33114tki618y56ut17wy76q].[usr:Calculation_521573165308649472:qk]' />
+              <size column='[federated.13xcr33114tki618y56ut17wy76q].[sum:Number of Records:qk]' />
+              <text column='[federated.13xcr33114tki618y56ut17wy76q].[sum:Number of Records:qk]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-show' value='true' />
+                <format attr='mark-labels-cull' value='true' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>[federated.13xcr33114tki618y56ut17wy76q].[none:actual:ok]</rows>
+        <cols>[federated.13xcr33114tki618y56ut17wy76q].[usr:Calculation_521573165308649472:qk]</cols>
+      </table>
+      <simple-id uuid='{ABD9FA1C-64FC-40D9-A8AC-0248F1225EAB}' />
+    </worksheet>
+    <worksheet name='distance to center'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='metadata' name='federated.1hq96zw1ykdvhc1ah588j047104q' />
+          </datasources>
+          <datasource-dependencies datasource='federated.1hq96zw1ykdvhc1ah588j047104q'>
+            <column-instance column='[distance_to_center]' derivation='Count' name='[cnt:distance_to_center:qk]' pivot='key' type='quantitative' />
+            <column aggregation='None' datatype='integer' name='[distance_to_center (bin)]' role='dimension' type='quantitative'>
+              <calculation class='bin' decimals='-1' formula='[distance_to_center]' peg='0' size='0.5' />
+            </column>
+            <column datatype='real' name='[distance_to_center]' role='measure' type='quantitative' />
+            <column-instance column='[distance_to_center (bin)]' derivation='None' name='[none:distance_to_center (bin):qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='axis'>
+            <encoding attr='space' class='0' field='[federated.1hq96zw1ykdvhc1ah588j047104q].[cnt:distance_to_center:qk]' field-type='quantitative' range-type='independent' scope='rows' type='space' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <mark-sizing custom-mark-size-in-axis-units='1.0' mark-alignment='mark-alignment-left' mark-sizing-setting='marks-scaling-on' use-custom-mark-size='false' />
+          </pane>
+        </panes>
+        <rows>[federated.1hq96zw1ykdvhc1ah588j047104q].[cnt:distance_to_center:qk]</rows>
+        <cols>[federated.1hq96zw1ykdvhc1ah588j047104q].[none:distance_to_center (bin):qk]</cols>
+        <show-full-range>
+          <column>[federated.1hq96zw1ykdvhc1ah588j047104q].[distance_to_center (bin)]</column>
+        </show-full-range>
+      </table>
+      <simple-id uuid='{7AFE1505-BCB3-425A-87CC-4CA05890A2EC}' />
+    </worksheet>
+    <worksheet name='h_res v-res correlation'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='metadata' name='federated.1hq96zw1ykdvhc1ah588j047104q' />
+          </datasources>
+          <datasource-dependencies datasource='federated.1hq96zw1ykdvhc1ah588j047104q'>
+            <column datatype='integer' name='[Number of Records]' role='measure' type='quantitative' user:auto-column='numrec'>
+              <calculation class='tableau' formula='1' />
+            </column>
+            <column aggregation='None' datatype='integer' name='[Px Per Lat Ratio (bin)]' role='dimension' type='quantitative'>
+              <calculation class='bin' decimals='1' formula='[px_per_lat_ratio]' peg='0' size='10' />
+            </column>
+            <column aggregation='None' datatype='integer' name='[Px Per Lon Ratio (bin)]' role='dimension' type='quantitative'>
+              <calculation class='bin' decimals='1' formula='[px_per_lon_ratio]' peg='0' size='10' />
+            </column>
+            <column aggregation='Sum' caption='Cluster' datatype='integer' name='[cluster]' role='dimension' type='ordinal' />
+            <column-instance column='[Px Per Lat Ratio (bin)]' derivation='None' name='[none:Px Per Lat Ratio (bin):ok]' pivot='key' type='ordinal' />
+            <column-instance column='[Px Per Lon Ratio (bin)]' derivation='None' name='[none:Px Per Lon Ratio (bin):ok]' pivot='key' type='ordinal' />
+            <column-instance column='[cluster]' derivation='None' name='[none:cluster:ok]' pivot='key' type='ordinal' />
+            <column aggregation='Avg' caption='Px Per Lat Ratio' datatype='real' name='[px_per_lat_ratio]' role='measure' semantic-role='' type='quantitative' />
+            <column aggregation='Avg' caption='Px Per Lon Ratio' datatype='integer' name='[px_per_lon_ratio]' role='measure' semantic-role='' type='quantitative' />
+            <column-instance column='[Number of Records]' derivation='Sum' name='[sum:Number of Records:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <filter class='categorical' column='[federated.1hq96zw1ykdvhc1ah588j047104q].[none:cluster:ok]'>
+            <groupfilter function='member' level='[none:cluster:ok]' member='49' user:ui-domain='relevant' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+          </filter>
+          <slices>
+            <column>[federated.1hq96zw1ykdvhc1ah588j047104q].[none:cluster:ok]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style />
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <color column='[federated.1hq96zw1ykdvhc1ah588j047104q].[sum:Number of Records:qk]' />
+            </encodings>
+          </pane>
+        </panes>
+        <rows>[federated.1hq96zw1ykdvhc1ah588j047104q].[none:Px Per Lon Ratio (bin):ok]</rows>
+        <cols>[federated.1hq96zw1ykdvhc1ah588j047104q].[none:Px Per Lat Ratio (bin):ok]</cols>
+      </table>
+      <simple-id uuid='{0F84F3F5-C1B0-4FD4-A148-9956AED038F0}' />
+    </worksheet>
+    <worksheet name='model_probs (1)'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run>&lt;Sheet Name&gt;&#10;Insight:&#10;If cluster_probs[0] &gt; 0.99 then pick the first cluster.</run>
+          </formatted-text>
+        </title>
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='model_probs' name='federated.0zsy4w70er7gue1fcp2mf1iobc85' />
+          </datasources>
+          <datasource-dependencies datasource='federated.0zsy4w70er7gue1fcp2mf1iobc85'>
+            <column aggregation='None' datatype='integer' name='[0 (bin)]' role='dimension' type='quantitative'>
+              <calculation class='bin' decimals='-2' formula='[0]' peg='0' size='0.01' />
+            </column>
+            <column aggregation='Sum' datatype='real' name='[0]' role='dimension' type='ordinal' />
+            <column caption='accuracy' datatype='integer' name='[Calculation_5645965858521665540]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='if [model_is_right] then 1 else 0 end' />
+            </column>
+            <column-instance column='[Calculation_5645965858521665540]' derivation='Avg' name='[avg:Calculation_5645965858521665540:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[0]' derivation='Count' name='[cnt:0:qk]' pivot='key' type='quantitative' />
+            <column caption='Model Is Right' datatype='boolean' name='[model_is_right]' role='dimension' type='nominal' />
+            <column-instance column='[0 (bin)]' derivation='None' name='[none:0 (bin):qk]' pivot='key' type='quantitative' />
+            <column-instance column='[0]' derivation='Count' name='[pcto:cnt:0:qk]' pivot='key' type='quantitative'>
+              <table-calc ordering-type='Rows' type='PctTotal' />
+            </column-instance>
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style />
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <mark-sizing custom-mark-size-in-axis-units='1.0' mark-alignment='mark-alignment-left' mark-sizing-setting='marks-scaling-on' use-custom-mark-size='false' />
+          </pane>
+          <pane id='1' selection-relaxation-option='selection-relaxation-allow' y-axis-name='[federated.0zsy4w70er7gue1fcp2mf1iobc85].[cnt:0:qk]'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <mark-sizing custom-mark-size-in-axis-units='1.0' mark-alignment='mark-alignment-left' mark-sizing-setting='marks-scaling-on' use-custom-mark-size='false' />
+            <encodings>
+              <text column='[federated.0zsy4w70er7gue1fcp2mf1iobc85].[pcto:cnt:0:qk]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-show' value='true' />
+                <format attr='mark-labels-cull' value='true' />
+              </style-rule>
+            </style>
+          </pane>
+          <pane id='2' selection-relaxation-option='selection-relaxation-allow' y-axis-name='[federated.0zsy4w70er7gue1fcp2mf1iobc85].[avg:Calculation_5645965858521665540:qk]'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Line' />
+          </pane>
+        </panes>
+        <rows>([federated.0zsy4w70er7gue1fcp2mf1iobc85].[cnt:0:qk] + [federated.0zsy4w70er7gue1fcp2mf1iobc85].[avg:Calculation_5645965858521665540:qk])</rows>
+        <cols>[federated.0zsy4w70er7gue1fcp2mf1iobc85].[none:0 (bin):qk]</cols>
+        <show-full-range>
+          <column>[federated.0zsy4w70er7gue1fcp2mf1iobc85].[0 (bin)]</column>
+        </show-full-range>
+      </table>
+      <simple-id uuid='{A9338A54-99F4-460E-960E-AD45209D1BA6}' />
+    </worksheet>
+    <worksheet name='model_probs (2)'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='model_probs' name='federated.0zsy4w70er7gue1fcp2mf1iobc85' />
+          </datasources>
+          <datasource-dependencies datasource='federated.0zsy4w70er7gue1fcp2mf1iobc85'>
+            <column aggregation='None' datatype='integer' name='[0+1 (bin)]' role='dimension' type='quantitative'>
+              <calculation class='bin' decimals='-2' formula='[Calculation_5645965858525286405]' peg='0' size='0.01' />
+            </column>
+            <column aggregation='Sum' datatype='real' name='[0]' role='dimension' type='ordinal' />
+            <column datatype='real' name='[1]' role='measure' type='quantitative' />
+            <column caption='accuracy' datatype='integer' name='[Calculation_5645965858521665540]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='if [model_is_right] then 1 else 0 end' />
+            </column>
+            <column caption='0+1' datatype='real' name='[Calculation_5645965858525286405]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='[0]+[1]' />
+            </column>
+            <column-instance column='[Calculation_5645965858521665540]' derivation='Avg' name='[avg:Calculation_5645965858521665540:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Calculation_5645965858525286405]' derivation='Count' name='[cnt:Calculation_5645965858525286405:qk]' pivot='key' type='quantitative' />
+            <column caption='Model Is Right' datatype='boolean' name='[model_is_right]' role='dimension' type='nominal' />
+            <column-instance column='[0+1 (bin)]' derivation='None' name='[none:0+1 (bin):qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style />
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <mark-sizing custom-mark-size-in-axis-units='1.0' mark-alignment='mark-alignment-left' mark-sizing-setting='marks-scaling-on' use-custom-mark-size='false' />
+          </pane>
+          <pane id='1' selection-relaxation-option='selection-relaxation-allow' y-axis-name='[federated.0zsy4w70er7gue1fcp2mf1iobc85].[cnt:Calculation_5645965858525286405:qk]'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <mark-sizing custom-mark-size-in-axis-units='1.0' mark-alignment='mark-alignment-left' mark-sizing-setting='marks-scaling-on' use-custom-mark-size='false' />
+          </pane>
+          <pane id='2' selection-relaxation-option='selection-relaxation-allow' y-axis-name='[federated.0zsy4w70er7gue1fcp2mf1iobc85].[avg:Calculation_5645965858521665540:qk]'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Line' />
+          </pane>
+        </panes>
+        <rows>([federated.0zsy4w70er7gue1fcp2mf1iobc85].[cnt:Calculation_5645965858525286405:qk] + [federated.0zsy4w70er7gue1fcp2mf1iobc85].[avg:Calculation_5645965858521665540:qk])</rows>
+        <cols>[federated.0zsy4w70er7gue1fcp2mf1iobc85].[none:0+1 (bin):qk]</cols>
+        <show-full-range>
+          <column>[federated.0zsy4w70er7gue1fcp2mf1iobc85].[0+1 (bin)]</column>
+        </show-full-range>
+      </table>
+      <simple-id uuid='{7B71B39B-6EE7-4461-878E-2C6617AD5A65}' />
+    </worksheet>
+    <worksheet name='px_per_lat_ratio'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='metadata' name='federated.1hq96zw1ykdvhc1ah588j047104q' />
+          </datasources>
+          <datasource-dependencies datasource='federated.1hq96zw1ykdvhc1ah588j047104q'>
+            <column aggregation='None' datatype='integer' name='[Px Per Lat Ratio (bin)]' role='dimension' type='quantitative'>
+              <calculation class='bin' decimals='1' formula='[px_per_lat_ratio]' peg='0' size='10' />
+            </column>
+            <column-instance column='[px_per_lat_ratio]' derivation='Count' name='[cnt:px_per_lat_ratio:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Px Per Lat Ratio (bin)]' derivation='None' name='[none:Px Per Lat Ratio (bin):qk]' pivot='key' type='quantitative' />
+            <column aggregation='Avg' caption='Px Per Lat Ratio' datatype='real' name='[px_per_lat_ratio]' role='measure' semantic-role='' type='quantitative' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style />
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <mark-sizing custom-mark-size-in-axis-units='1.0' mark-alignment='mark-alignment-left' mark-sizing-setting='marks-scaling-on' use-custom-mark-size='false' />
+          </pane>
+        </panes>
+        <rows>[federated.1hq96zw1ykdvhc1ah588j047104q].[cnt:px_per_lat_ratio:qk]</rows>
+        <cols>[federated.1hq96zw1ykdvhc1ah588j047104q].[none:Px Per Lat Ratio (bin):qk]</cols>
+        <show-full-range>
+          <column>[federated.1hq96zw1ykdvhc1ah588j047104q].[Px Per Lat Ratio (bin)]</column>
+        </show-full-range>
+      </table>
+      <simple-id uuid='{429CC2F5-DD4F-4992-9B40-814C360C2DCA}' />
+    </worksheet>
+    <worksheet name='px_per_lon_ratio'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='metadata' name='federated.1hq96zw1ykdvhc1ah588j047104q' />
+          </datasources>
+          <datasource-dependencies datasource='federated.1hq96zw1ykdvhc1ah588j047104q'>
+            <column aggregation='None' datatype='integer' name='[Px Per Lon Ratio (bin)]' role='dimension' type='quantitative'>
+              <calculation class='bin' decimals='1' formula='[px_per_lon_ratio]' peg='0' size='10' />
+            </column>
+            <column aggregation='Sum' caption='Cluster' datatype='integer' name='[cluster]' role='dimension' type='ordinal' />
+            <column-instance column='[px_per_lon_ratio]' derivation='Count' name='[cnt:px_per_lon_ratio:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Px Per Lon Ratio (bin)]' derivation='None' name='[none:Px Per Lon Ratio (bin):qk]' pivot='key' type='quantitative' />
+            <column-instance column='[cluster]' derivation='None' name='[none:cluster:ok]' pivot='key' type='ordinal' />
+            <column aggregation='Avg' caption='Px Per Lon Ratio' datatype='integer' name='[px_per_lon_ratio]' role='measure' semantic-role='' type='quantitative' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='axis'>
+            <encoding attr='space' class='0' field='[federated.1hq96zw1ykdvhc1ah588j047104q].[cnt:px_per_lon_ratio:qk]' field-type='quantitative' range-type='independent' scope='rows' type='space' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <mark-sizing custom-mark-size-in-axis-units='1.0' mark-alignment='mark-alignment-left' mark-sizing-setting='marks-scaling-on' use-custom-mark-size='false' />
+          </pane>
+        </panes>
+        <rows>([federated.1hq96zw1ykdvhc1ah588j047104q].[none:cluster:ok] * [federated.1hq96zw1ykdvhc1ah588j047104q].[cnt:px_per_lon_ratio:qk])</rows>
+        <cols>[federated.1hq96zw1ykdvhc1ah588j047104q].[none:Px Per Lon Ratio (bin):qk]</cols>
+        <show-full-range>
+          <column>[federated.1hq96zw1ykdvhc1ah588j047104q].[Px Per Lon Ratio (bin)]</column>
+        </show-full-range>
+      </table>
+      <simple-id uuid='{D1B0257A-ABD7-4033-BD46-9D95C23D4430}' />
+    </worksheet>
+    <worksheet name='rmse distribution'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='model_errors' name='federated.13xcr33114tki618y56ut17wy76q' />
+          </datasources>
+          <datasource-dependencies datasource='federated.13xcr33114tki618y56ut17wy76q'>
+            <column-instance column='[rmse]' derivation='Count' name='[cnt:rmse:qk]' pivot='key' type='quantitative' />
+            <column caption='Image Type' datatype='string' name='[image_type]' role='dimension' type='nominal' />
+            <column-instance column='[image_type]' derivation='None' name='[none:image_type:nk]' pivot='key' type='nominal' />
+            <column-instance column='[rmse (bin)]' derivation='None' name='[none:rmse (bin):qk]' pivot='key' type='quantitative' />
+            <column aggregation='None' datatype='integer' name='[rmse (bin)]' role='dimension' type='quantitative'>
+              <calculation class='bin' decimals='-1' formula='[rmse]' peg='0' size='0.1' />
+            </column>
+            <column datatype='real' name='[rmse]' role='measure' type='quantitative' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style />
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <mark-sizing custom-mark-size-in-axis-units='1.0' mark-alignment='mark-alignment-left' mark-sizing-setting='marks-scaling-on' use-custom-mark-size='false' />
+          </pane>
+        </panes>
+        <rows>([federated.13xcr33114tki618y56ut17wy76q].[none:image_type:nk] * [federated.13xcr33114tki618y56ut17wy76q].[cnt:rmse:qk])</rows>
+        <cols>[federated.13xcr33114tki618y56ut17wy76q].[none:rmse (bin):qk]</cols>
+        <show-full-range>
+          <column>[federated.13xcr33114tki618y56ut17wy76q].[rmse (bin)]</column>
+        </show-full-range>
+      </table>
+      <simple-id uuid='{2B095DF3-4ECC-43BF-A347-B0D595DD2268}' />
+    </worksheet>
+    <worksheet name='rmse per image type'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='model_errors' name='federated.13xcr33114tki618y56ut17wy76q' />
+          </datasources>
+          <datasource-dependencies datasource='federated.13xcr33114tki618y56ut17wy76q'>
+            <column caption='class_prediction_accuracy' datatype='string' name='[Calculation_1845912931198816256]' role='dimension' type='nominal'>
+              <calculation class='tableau' formula='if [actual] = [predicted] then &apos;Correct cluster&apos;&#10;else &apos;Incorrect cluster&apos;&#10;end' />
+            </column>
+            <column aggregation='Sum' caption='Actual' datatype='integer' name='[actual]' role='dimension' type='ordinal' />
+            <column-instance column='[rmse]' derivation='Avg' name='[avg:rmse:qk]' pivot='key' type='quantitative' />
+            <column caption='Image Type' datatype='string' name='[image_type]' role='dimension' type='nominal' />
+            <column-instance column='[Calculation_1845912931198816256]' derivation='None' name='[none:Calculation_1845912931198816256:nk]' pivot='key' type='nominal' />
+            <column-instance column='[image_type]' derivation='None' name='[none:image_type:nk]' pivot='key' type='nominal' />
+            <column aggregation='Sum' caption='Predicted' datatype='integer' name='[predicted]' role='dimension' type='ordinal' />
+            <column datatype='real' name='[rmse]' role='measure' type='quantitative' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style />
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <text column='[federated.13xcr33114tki618y56ut17wy76q].[avg:rmse:qk]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-show' value='true' />
+                <format attr='mark-labels-cull' value='true' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>([federated.13xcr33114tki618y56ut17wy76q].[none:Calculation_1845912931198816256:nk] * [federated.13xcr33114tki618y56ut17wy76q].[avg:rmse:qk])</rows>
+        <cols>[federated.13xcr33114tki618y56ut17wy76q].[none:image_type:nk]</cols>
+      </table>
+      <simple-id uuid='{B5CA60A0-54EB-4410-B3AE-B5AC2A460D0D}' />
+    </worksheet>
+  </worksheets>
+  <dashboards>
+    <dashboard name='Dashboard 1'>
+      <style />
+      <size maxheight='800' maxwidth='1600' minheight='800' minwidth='1600' sizing-mode='fixed' />
+      <zones>
+        <zone h='100000' id='4' type='layout-basic' w='100000' x='0' y='0'>
+          <zone h='98000' id='3' name='px_per_lon_ratio' w='49500' x='500' y='1000'>
+            <zone-style>
+              <format attr='border-color' value='#000000' />
+              <format attr='border-style' value='none' />
+              <format attr='border-width' value='0' />
+              <format attr='margin' value='4' />
+            </zone-style>
+          </zone>
+          <zone h='98000' id='5' name='px_per_lat_ratio' w='49500' x='50000' y='1000'>
+            <zone-style>
+              <format attr='border-color' value='#000000' />
+              <format attr='border-style' value='none' />
+              <format attr='border-width' value='0' />
+              <format attr='margin' value='4' />
+            </zone-style>
+          </zone>
+          <zone-style>
+            <format attr='border-color' value='#000000' />
+            <format attr='border-style' value='none' />
+            <format attr='border-width' value='0' />
+            <format attr='margin' value='8' />
+          </zone-style>
+        </zone>
+      </zones>
+      <devicelayouts>
+        <devicelayout auto-generated='true' name='Phone'>
+          <size maxheight='700' minheight='700' sizing-mode='vscroll' />
+          <zones>
+            <zone h='100000' id='46' type='layout-basic' w='100000' x='0' y='0'>
+              <zone h='98000' id='47' param='vert' type='layout-flow' w='99000' x='500' y='1000'>
+                <zone fixed-size='280' h='98000' id='3' is-fixed='true' name='px_per_lon_ratio' w='49500' x='500' y='1000'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+                <zone fixed-size='280' h='98000' id='5' is-fixed='true' name='px_per_lat_ratio' w='49500' x='50000' y='1000'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+              </zone>
+              <zone-style>
+                <format attr='border-color' value='#000000' />
+                <format attr='border-style' value='none' />
+                <format attr='border-width' value='0' />
+                <format attr='margin' value='8' />
+              </zone-style>
+            </zone>
+          </zones>
+        </devicelayout>
+      </devicelayouts>
+      <simple-id uuid='{D87A8743-6CEB-4051-BCB6-63130079F803}' />
+    </dashboard>
+  </dashboards>
+  <windows source-height='114'>
+    <window class='worksheet' name='Sheet 1'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card pane-specification-id='0' param='[federated.13xcr33114tki618y56ut17wy76q].[sum:Number of Records:qk]' type='color' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <zoom type='entire-view' />
+      </viewpoint>
+      <simple-id uuid='{AE13D0E7-0D71-4DC7-83D4-8CE5E68B1C61}' />
+    </window>
+    <window class='worksheet' name='Sheet 2'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{BA403E57-C273-4381-84E6-10EBD2AF0126}' />
+    </window>
+    <window class='worksheet' name='accuracy per class'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card pane-specification-id='0' param='[federated.13xcr33114tki618y56ut17wy76q].[sum:Number of Records:qk]' type='size' />
+            <card pane-specification-id='0' param='[federated.13xcr33114tki618y56ut17wy76q].[usr:Calculation_521573165308649472:qk]' type='color' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <zoom type='fit-width' />
+      </viewpoint>
+      <simple-id uuid='{C995D074-2899-4ABD-ADCF-A09CE0116720}' />
+    </window>
+    <window class='worksheet' name='rmse distribution'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{46714693-94E1-4F23-99C8-3B84145DD315}' />
+    </window>
+    <window class='worksheet' name='rmse per image type'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{EFCE26BA-3C26-4C1D-8B3E-D00E49DED819}' />
+    </window>
+    <window class='worksheet' name='M1: accuracy' tab-color='#4f779a'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{245D5550-9488-464A-A7DF-5A7CB074E8A3}' />
+    </window>
+    <window class='worksheet' name='M1: rmse per class' tab-color='#4f779a'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card pane-specification-id='0' param='[federated.1sdhlwk1l7ac5816ouqq41j4074i].[avg:rmse:qk]' type='color' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{3AECB628-FF99-445C-B760-64AA28CA94C0}' />
+    </window>
+    <window class='worksheet' name='M1: average error' tab-color='#4f779a'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{FBF43D66-D67F-4DEC-8207-5FA1B994C32F}' />
+    </window>
+    <window class='worksheet' name='M1: confusion matrix' tab-color='#4f779a'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card pane-specification-id='0' param='[federated.1sdhlwk1l7ac5816ouqq41j4074i].[sum:Number of Records:qk]' type='color' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <zoom type='entire-view' />
+      </viewpoint>
+      <simple-id uuid='{0BCDF7D2-49EF-4CB9-90B3-CF6CDE892529}' />
+    </window>
+    <window class='worksheet' name='Sheet 9'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{98948F58-DAED-42AA-88B2-1E7E61C91440}' />
+    </window>
+    <window class='worksheet' name='Sheet 11'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card pane-specification-id='0' param='[federated.1e5rusk07q916o12yeyws0ok8afz].[none:Calculation_5645965856280035331:nk]' type='color' />
+            <card mode='type_in' param='[Parameters].[Parameter 1]' type='parameter' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <zoom type='entire-view' />
+      </viewpoint>
+      <simple-id uuid='{4B833020-C201-4DC4-B60C-5D7AF2FC2DB4}' />
+    </window>
+    <window class='worksheet' name='Sheet 12'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card mode='type_in' param='[Parameters].[Parameter 1]' type='parameter' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{4E9A4413-1870-4102-92B2-A90A05AB0285}' />
+    </window>
+    <window class='worksheet' name='Sheet 13'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{1E5755C3-AE17-4510-8E8D-82C54A2A82F6}' />
+    </window>
+    <window class='worksheet' name='px_per_lon_ratio'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <zoom type='fit-width' />
+      </viewpoint>
+      <simple-id uuid='{001098A6-70C8-4AB2-80DC-91A283807C2F}' />
+    </window>
+    <window class='worksheet' name='px_per_lat_ratio'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{380DEF0F-0D7A-49B1-85C4-A95BB326A1D6}' />
+    </window>
+    <window class='dashboard' name='Dashboard 1'>
+      <viewpoints>
+        <viewpoint name='px_per_lat_ratio'>
+          <zoom type='entire-view' />
+        </viewpoint>
+        <viewpoint name='px_per_lon_ratio'>
+          <zoom type='entire-view' />
+        </viewpoint>
+      </viewpoints>
+      <active id='-1' />
+      <simple-id uuid='{6A8D5BE3-5C68-4302-A61D-C0530D2C0A30}' />
+    </window>
+    <window class='worksheet' name='h_res v-res correlation'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card mode='slider' param='[federated.1hq96zw1ykdvhc1ah588j047104q].[none:cluster:ok]' type='filter' />
+            <card pane-specification-id='0' param='[federated.1hq96zw1ykdvhc1ah588j047104q].[sum:Number of Records:qk]' type='color' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <zoom type='entire-view' />
+      </viewpoint>
+      <simple-id uuid='{6933E907-4F5B-42C7-BB8D-9EE27F15E355}' />
+    </window>
+    <window class='worksheet' name='distance to center'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{EB01393C-00D5-4580-BECE-91017DC1F5B7}' />
+    </window>
+    <window class='worksheet' name='model_probs (1)'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{639724F1-4721-43CE-A4DF-DCD1BCDCBE34}' />
+    </window>
+    <window class='worksheet' maximized='true' name='model_probs (2)'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{00C20E1A-1A12-406E-8F03-07DCFC562F03}' />
+    </window>
+    <window class='worksheet' name='Sheet 19'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{19D39918-5393-4784-B898-AF42C21E2021}' />
+    </window>
+  </windows>
+</workbook>

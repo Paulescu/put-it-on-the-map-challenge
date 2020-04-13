@@ -1,0 +1,11 @@
+.DS_Store
+.ipynb_checkpoints/
+.idea/
+.python-version
+__pycache__/
+
+data/
+saved_weights/
+
+**.pkl
+**.csv
